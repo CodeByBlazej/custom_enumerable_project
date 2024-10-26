@@ -1,5 +1,10 @@
 module Enumerable
   # Your code goes here
+  def my_each_with_index
+    self.each_with_index do |elem, index|
+      elem if yield(elem, index)
+    end
+  end
 end
 
 # You will first have to define my_each
