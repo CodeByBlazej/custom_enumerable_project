@@ -45,6 +45,12 @@ module Enumerable
       yield(value)
     end
   end
+
+  def my_inject(initial_value)
+    self.inject(initial_value) do |sum, n|
+      yield(sum, n)
+    end
+  end
 end
 
 # You will first have to define my_each
