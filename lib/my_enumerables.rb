@@ -5,6 +5,12 @@ module Enumerable
       elem if yield(elem, index)
     end
   end
+
+  def my_select
+    self.select do |value|
+      value if yield(value)
+    end
+  end
 end
 
 # You will first have to define my_each
