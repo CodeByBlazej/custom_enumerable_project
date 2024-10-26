@@ -23,6 +23,12 @@ module Enumerable
       value if yield(value)
     end
   end
+
+  def my_none?
+    self.none? do |value|
+      value if yield(value)
+    end
+  end
 end
 
 # You will first have to define my_each
