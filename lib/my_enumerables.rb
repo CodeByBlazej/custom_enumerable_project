@@ -29,6 +29,16 @@ module Enumerable
       value if yield(value)
     end
   end
+
+  def my_count
+    self.count do |value|
+      if block_given?
+        value if yield(value)
+      else
+        self.size
+      end
+    end
+  end
 end
 
 # You will first have to define my_each
