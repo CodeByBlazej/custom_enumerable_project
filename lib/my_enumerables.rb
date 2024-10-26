@@ -39,6 +39,12 @@ module Enumerable
       end
     end
   end
+
+  def my_map
+    self.map do |value|
+      yield(value)
+    end
+  end
 end
 
 # You will first have to define my_each
