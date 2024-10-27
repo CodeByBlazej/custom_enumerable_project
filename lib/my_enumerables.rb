@@ -7,49 +7,60 @@ module Enumerable
   end
 
   def my_select
-    self.select do |value|
-      value if yield(value)
+    arr = []
+    self.my_each do |value|
+      arr << value if yield(value)
     end
+    arr
   end
 
   def my_all?
-    self.all? do |value|
-      value if yield(value)
+    self.my_each do |value|
+      return false unless yield(value)
     end
+    true
   end
 
   def my_any?
-    self.any? do |value|
-      value if yield(value)
+    self.my_each do |value|
+      return true if yield(value)
     end
+    false
   end
 
   def my_none?
-    self.none? do |value|
-      value if yield(value)
+    self.my_each do |value|
+      return false if yield(value)
     end
+    true
   end
 
   def my_count
-    self.count do |value|
-      if block_given?
-        value if yield(value)
-      else
-        self.size
+    count = 0
+    if block_given?
+      self.my_each do |value|
+        count += 1 if yield(value)
       end
+    else
+      count = self.size
     end
+    count
   end
 
   def my_map
-    self.map do |value|
-      yield(value)
+    arr = []
+    self.my_each do |value|
+      arr << yield(value)
     end
+    arr
   end
 
   def my_inject(initial_value)
-    self.inject(initial_value) do |sum, n|
-      yield(sum, n)
+    accumulator = initial_value
+    self.my_each do |elem|
+      accumulator = yield(accumulator, elem)
     end
+    accumulator
   end
 end
 
